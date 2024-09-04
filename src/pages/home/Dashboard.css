@@ -1,6 +1,5 @@
 .dashboard {
     padding: 20px;
-    background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -9,14 +8,16 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    
 }
 
 .headerContainer h2 {
     font-size: 24px;
     color: #333;
-    margin: 0;
 }
-
+.header{
+margin-left: 40px;
+}
 .grey-text {
     color: #717171;
     font-size: 14px;
@@ -33,14 +34,15 @@
     display: flex;
     gap: 20px;
 }
-
+.flexBox1{
+    flex: 1;
+}
 .flexBox{
     flex-direction: row;
 }
 
 .gridBox {
     display: flex;
-    flex-direction: column;
     gap: 20px;
     flex: 2;
 }
@@ -59,19 +61,23 @@
     flex: 1;
 }
 .containerColor1 {
-    background-color: #f6ddf8;
+    background-color: #F4DDFFCC;
+    ;
    
 }
 .containerColor2 {
-    background-color:#d3faf1 ;
+    background-color: #FFE3C3BF;
+    ;
    
 }
 .containerColor3 {
-    background-color:  #f9e5d5 ;
+    background-color:#BEFFE499;
+    ;
    
 }
 .containerColor4 {
-    background-color: #f8dbe5;
+    background-color: #FFD1D7E5;
+    ;
     
 }
 .greyContainer:hover{
@@ -89,8 +95,15 @@
 
 .pointsRow {
     display: flex;
-    flex-direction: row;
     gap: 20px;
+    flex: 1;
+    margin-inline-start: 40px;
+}
+.pointsRow1 {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    margin-inline-end: 40px;
 }
 
 

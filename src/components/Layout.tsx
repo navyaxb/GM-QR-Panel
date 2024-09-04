@@ -7,7 +7,7 @@ import SpeakerIcon from '@rsuite/icons/Speaker';
 import PublicOpinionIcon from '@rsuite/icons/PublicOpinion';
 import ExitIcon from '@rsuite/icons/Exit';
 import { useNavigate } from 'react-router-dom';
-
+import logo from '../assets/logo.png'
 interface LayoutProps {
     children: ReactNode;
 }
@@ -54,7 +54,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                     <Sidenav.Body>
                         <Sidenav.Header>
                             <div style={imageContainer}>
-                                {/* <img style={headerStyles} src={logo} alt="Logo" /> */}
+                                <img style={headerStyles} src={logo} alt="Logo" />
                             </div>
                             <div style={headerText}>
                                 GM Dhan Utsav
@@ -66,7 +66,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                 setActiveKey(key);
                                 switch (key) {
                                     case '1': navigate('/dashboard'); break;
-                                    case '2': navigate('/Masters'); break;
                                     case '4': navigate('/Tickets'); break;
                                     case '5': navigate('/Testimonials'); break;
                                     case '10': handleLogout(); break;
@@ -75,17 +74,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                             }}
                         >
                             <Nav.Item eventKey="1" icon={<DashboardIcon />}>Dashboard</Nav.Item>
-                            <Nav.Item eventKey="2" title="Masters" icon={<BranchIcon />}>Masters</Nav.Item>
-                            <Nav.Menu placement="rightStart" eventKey="3" title="Reports" icon={<PageIcon />}>
-                                <Nav.Item eventKey="3-1">Login Report</Nav.Item>
-                                <Nav.Item eventKey="3-2">Registered User Report</Nav.Item>
-                                <Nav.Item eventKey="3-3">QR Transaction Report</Nav.Item>
-                                <Nav.Item eventKey="3-4">Points Report</Nav.Item>
-                                <Nav.Item eventKey="3-5">Bank Details Report</Nav.Item>
-                                <Nav.Item eventKey="3-6">OTP Report</Nav.Item>
-                                <Nav.Item eventKey="3-7">KYC Report</Nav.Item>
-                                <Nav.Item eventKey="3-8">Other Report</Nav.Item>
-                            </Nav.Menu>
+                            
                             <Nav.Item eventKey="4" icon={<SpeakerIcon />}>Tickets</Nav.Item>
                             <Nav.Item eventKey="5" icon={<PublicOpinionIcon />}>Testimonials</Nav.Item>
                             <Nav.Item eventKey="10" icon={<ExitIcon />}>Logout</Nav.Item>
