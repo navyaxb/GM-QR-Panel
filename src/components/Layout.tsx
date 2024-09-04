@@ -8,6 +8,10 @@ import PublicOpinionIcon from '@rsuite/icons/PublicOpinion';
 import ExitIcon from '@rsuite/icons/Exit';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png'
+import PhoneIcon from '@rsuite/icons/Phone';
+import InfoOutlineIcon from '@rsuite/icons/InfoOutline';
+import QrcodeIcon from '@rsuite/icons/Qrcode';
+
 interface LayoutProps {
     children: ReactNode;
 }
@@ -66,8 +70,11 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                 setActiveKey(key);
                                 switch (key) {
                                     case '1': navigate('/dashboard'); break;
-                                    case '4': navigate('/Tickets'); break;
-                                    case '5': navigate('/Testimonials'); break;
+                                    case '2': navigate('/productionorder'); break;
+                                    case '3': navigate('/generateqr'); break;
+                                    case '4': navigate('/qr-history'); break;
+                                    case '5': navigate('/contactus'); break;
+                                    case '6': navigate('/aboutus'); break;
                                     case '10': handleLogout(); break;
                                     default: break;
                                 }
@@ -75,8 +82,10 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                         >
                             <Nav.Item eventKey="1" icon={<DashboardIcon />}>Dashboard</Nav.Item>
                             
-                            <Nav.Item eventKey="4" icon={<SpeakerIcon />}>Tickets</Nav.Item>
-                            <Nav.Item eventKey="5" icon={<PublicOpinionIcon />}>Testimonials</Nav.Item>
+                            <Nav.Item eventKey="2" icon={<SpeakerIcon />}>Production Order</Nav.Item>
+                            <Nav.Item eventKey="4" icon={<QrcodeIcon />}>QR History</Nav.Item>
+                            <Nav.Item eventKey="5" icon={<PhoneIcon />}>Contact Us</Nav.Item>
+                            <Nav.Item eventKey="6" icon={<InfoOutlineIcon />}>About Us</Nav.Item>
                             <Nav.Item eventKey="10" icon={<ExitIcon />}>Logout</Nav.Item>
                         </Nav>
                     </Sidenav.Body>
