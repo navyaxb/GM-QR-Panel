@@ -1,0 +1,162 @@
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.flexBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.flex1 {
+    flex: 1;
+}
+
+.flex2 {
+    flex: 2;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+    padding: 10px 30px 10px 30px;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
+}
+
+.footerText {
+    color: var(--white);
+    font-size: 11px;
+    display: block;
+    font-weight: 500;
+}
+
+.footerTextContainer {
+    flex-direction: row;
+    display: flex;
+}
+
+.footerTextLink {
+    margin-left: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.black-normal-text {
+    color: var(--black);
+    font-size: 14px;
+}
+
+.black-small-text {
+    color: var(--black);
+    font-size: 12px;
+}
+
+.black-large-bold-text {
+    color: var(--black);
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.grey-large-text {
+    color: var(--grey-text);
+    font-size: 20px;
+}
+
+.black-normal-bold-text {
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.black-bold-text {
+    color: var(--black);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.grey-small-text {
+    color: var(--grey-text);
+    font-size: 12px;
+}
+
+.grey-normal-text {
+    color: var(--grey-text);
+    font-size: 16px;
+}
+
+.grey-text {
+    color: var(--grey-text);
+    font-size: 20px;
+}
+
+.black-text {
+    color: var(--black);
+    font-size: 20px;
+}
+
+.black-medium-bold-text {
+    color: var(--black);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.block {
+    display: block;
+}
+
+.primaryBtn {
+    background-color: var(--rs-primary-600);
+    height: 50px;
+    width: 200px;
+    transition: 0.2s ease-in-out;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+
+}
+
+.primaryBtnText {
+    color: #FFF;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.primaryBtn:hover{
+    background-color: var(--rs-primary-500);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 8px;
+
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #ececec; 
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #dedede; 
+  }
+

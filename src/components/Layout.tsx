@@ -6,7 +6,6 @@ import BranchIcon from '@rsuite/icons/Branch';
 import SpeakerIcon from '@rsuite/icons/Speaker';
 import PublicOpinionIcon from '@rsuite/icons/PublicOpinion';
 import ExitIcon from '@rsuite/icons/Exit';
-import logo from '../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 
 interface LayoutProps {
@@ -55,7 +54,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                     <Sidenav.Body>
                         <Sidenav.Header>
                             <div style={imageContainer}>
-                                <img style={headerStyles} src={logo} alt="Logo" />
+                                {/* <img style={headerStyles} src={logo} alt="Logo" /> */}
                             </div>
                             <div style={headerText}>
                                 GM Dhan Utsav

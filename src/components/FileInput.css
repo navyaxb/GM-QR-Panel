@@ -1,0 +1,73 @@
+.file-input-wrapper {
+    display: flex;
+    width: 100%;
+    height: 120px;
+    justify-content: center;
+  }
+  
+  .file-input {
+    display: none; /* Hide the actual file input */
+  }
+  
+  .file-input-label {
+    font-size: 16px;
+  }
+  
+  .file-name {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--grey-text);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .file-input-container {
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border: 1px dashed var(--grey-text);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .file-input-container:hover {
+    background-color: var(--light-grey);
+  }
+  
+
+  .uploaded-image {
+    width: auto;
+    height: 100%;
+  }
+
+  .fileButton {
+    background-color: var(--rs-primary-600);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    gap: 10px;
+  }
+
+  .fileButton:hover {
+    background-color: var(--rs-primary-500);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 8px;
+
+  }
+
+  .fileButtonText {
+    color: #FFF;
+    font-weight: 500;
+    font-size: 16px;
+  }
