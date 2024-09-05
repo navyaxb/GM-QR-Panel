@@ -118,17 +118,11 @@ const QRHistory = () => {
                     getRowId={(data: QRHistoryData) => data.item_code}
                 />
             </div>
-            {!itemCode && (
-                <Button
-                    variant="contained"
-                    style={{ marginTop: '20px' }}
-                    onClick={handleGenerateMoreClick}
-                >
-                    Generate More QR
-                </Button>
-            )}
+           
         </div>
     );
 };
 
 export default QRHistory;
+
+

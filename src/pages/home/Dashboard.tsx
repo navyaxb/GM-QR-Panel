@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import ThreePOutlinedIcon from '@mui/icons-material/ThreePOutlined';
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';    
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 const Dashboard = () => {
     const [data, setData] = useState({
         total_users_registered: 0,
@@ -44,16 +44,6 @@ const Dashboard = () => {
     const UserStatsGrid = () => (
         <div className='gridBox'>
             <div className='pointsRow'>
-                <div className='greyContainer containerColor1'>
-                    <div className='dashboardIcon' >
-                        <DocumentScannerOutlinedIcon fontSize="medium" />
-                    </div>
-                    <div className='flexBox1'>
-                        <h2>{data.kyc_verified_users}</h2>
-                        <span>QR Codes Generated</span>
-                        <div className='change'>+24% From Yesterday</div>
-                    </div>
-                </div>
                 <div className='greyContainer containerColor2'>
                     <div className='dashboardIcon2'>
                         <ThreePOutlinedIcon fontSize="medium" />
@@ -64,8 +54,6 @@ const Dashboard = () => {
                         <div className='change'>+32% From Yesterday</div>
                     </div>
                 </div>
-            </div>
-            <div className='pointsRow1'>
                 <div className='greyContainer containerColor3'>
                     <div className='dashboardIcon3'>
                         <FileDownloadOutlinedIcon fontSize="medium" />
@@ -76,9 +64,14 @@ const Dashboard = () => {
                         <div className='change'>+20% From Yesterday</div>
                     </div>
                 </div>
+
+
+            </div>
+            <div className='pointsRow1'>
+
                 <div className='greyContainer containerColor4'>
                     <div className='dashboardIcon4'>
-                    <PersonRemoveOutlinedIcon fontSize="medium" />
+                        <PersonRemoveOutlinedIcon fontSize="medium" />
                     </div>
                     <div className='flexBox1'>
                         <h2>{data.blocked_users}</h2>
@@ -86,6 +79,16 @@ const Dashboard = () => {
                         <div className='change'>+22% From Yesterday</div>
                     </div>
 
+                </div>
+                <div className='greyContainer containerColor1'>
+                    <div className='dashboardIcon' >
+                        <DocumentScannerOutlinedIcon fontSize="medium" />
+                    </div>
+                    <div className='flexBox1'>
+                        <h2>{data.kyc_verified_users}</h2>
+                        <span>QR Codes Generated</span>
+                        <div className='change'>+24% From Yesterday</div>
+                    </div>
                 </div>
             </div>
 
