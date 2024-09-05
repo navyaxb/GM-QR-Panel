@@ -124,6 +124,18 @@ const ProductionOrderDetails = () => {
             editable: false,
         },
         {
+            field: 'item_desciption',
+            headerName: 'Item Description',
+            width: 150,
+            editable: false,
+        },
+        {
+            field: 'order_quantity',
+            headerName: 'Quantity',
+            width: 150,
+            editable: false,
+        },
+        {
             field: 'action',
             headerName: 'Action',
             width: 150,

@@ -90,7 +90,7 @@ const QRHistory = () => {
                         <Button
                             variant="contained"
                             style={{
-                                backgroundColor: isPending ? 'yellow' : 'red',
+                                backgroundColor: isPending ? 'yelow' : 'red',
                                 color: isPending ? 'black' : 'white',
                                 width: '100%',
                             }}

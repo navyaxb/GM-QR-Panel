@@ -70,14 +70,14 @@ const GenerateQRCodeForm = () => {
                 <div className="form-row" style={{ marginTop: '20px' }}>
                     <div className="input-group">
                         <label className="input-label">Serial Number Start</label>
-                        <Input placeholder="Serial Number Start" className="input-field" />
+                        <Input value="240500568010001" className="input-field"  readOnly/>
                     </div>
                     <div className="input-group">
                         <label className="input-label">Serial Number End</label>
-                        <Input placeholder="Serial Number End" className="input-field" />
+                        <Input value="240500568010010" className="input-field"  readOnly/>
                     </div>
                     <div className="input-group">
-                        <label className="input-label">Order Number</label>
+                        <label className="input-label">Purchasing Order Number</label>
                         <Input value={state.purchasing_document} className="input-field" readOnly />
                     </div>
                     <div className="input-group">

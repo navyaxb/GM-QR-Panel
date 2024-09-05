@@ -4,8 +4,10 @@ import { Input, InputGroup } from 'rsuite';
 import { Typography, Snackbar } from '@mui/material';
 import './Productions.css'
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 const ProductionOrder = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState([
         {
             id: 1,
@@ -187,10 +189,10 @@ const ProductionOrder = () => {
             field: 'action',
             headerName: 'Action',
             width: 250,
-            renderCell: (rowData: any) => (
+            renderCell: (params: any) => (
                 <div style={{ display: 'flex', gap: '8px' }}>
-                    <Button variant="outlined" onClick={() => handleDetailsClick(rowData)}>Details</Button>
-                    <Button variant="contained">Download</Button>
+                    <Button variant="outlined" onClick={() => handleDetailsClick(params.row)}>Details</Button>
+                    <Button variant="contained" onClick={() => handleDownloadClick(params.row)}>Download</Button>
                 </div>
             ),
         }
@@ -198,9 +200,19 @@ const ProductionOrder = () => {
        
     ];
     const handleDetailsClick = (rowData: any) => {
-        // Redirect to the details page
-        // In a real-world application, use `useNavigate` from `react-router-dom`
-        window.location.href = `/production-order-details/${rowData.id}`;
+        navigate(`/production-order-details/${rowData.id}`);
+    };
+    const handleDownloadClick = (rowData: any) => {
+        if (rowData && rowData.item_code) {
+            // Assuming the item_code is a comma-separated string, we'll use the first code
+            const itemCode = rowData.item_code.split(',')[0].trim();
+            navigate(`/qr-history/${itemCode}`);
+        } else {
+            console.error('Item code is undefined for this row:', rowData);
+            // You might want to show an error message to the user here
+            // For example:
+            // setErrorMessage('Unable to download QR history. Item code is missing.');
+        }
     };
 
     const styles = {

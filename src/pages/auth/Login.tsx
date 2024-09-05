@@ -9,17 +9,19 @@ import './Auth.css';
 const { StringType } = Schema.Types;
 
 const model = Schema.Model({
-    vendorName: StringType().isRequired('Vendor Name is required'),
+    vendorCode: StringType()
+        .isRequired('Vendor Code is required')
+        .pattern(/^V\d{5}$/, 'Invalid Vendor Code'),
     password: StringType().isRequired('Password is required')
 });
 
 interface FormValue {
-    vendorName: string;
+    vendorCode: string;
     password: string;
 }
 
 interface FormError {
-    vendorName?: string;
+    vendoCode?: string;
     password?: string;
     login?: string;
 }
@@ -28,7 +30,7 @@ const Login = () => {
     const formRef = useRef<any>(null);
     const [formError, setFormError] = useState<FormError>({});
     const [formValue, setFormValue] = useState<FormValue>({
-        vendorName: '',
+        vendorCode: '',
         password: ''
     });
     const navigate = useNavigate();
@@ -37,7 +39,7 @@ const Login = () => {
         if (formRef.current && !formRef.current.check()) {
             return;
         }
-        if (formValue.vendorName === 'evolveAdmin' && formValue.password === 'Admin@123') {
+        if (formValue.vendorCode === 'V02182' && formValue.password === 'Admin@123') {
             // Set authentication state in localStorage
             localStorage.setItem('isAuthenticated', 'true');
             navigate('/dashboard');
@@ -72,10 +74,10 @@ const Login = () => {
                 <Heading level={4}>Log In To Your Account.</Heading>
                 <Text muted style={{ marginBottom: '20px' }}>Welcome back! Please enter your log in details.</Text>
                 {formError.login && <Form.ErrorMessage style={{ marginBottom: '10px' }}>{formError.login}</Form.ErrorMessage>}
-                <Form.Group controlId="vendorName">
-                    <Form.ControlLabel>Vendor Name</Form.ControlLabel>
-                    <Form.Control name="vendorName" />
-                    <Form.HelpText>Vendor Name is required</Form.HelpText>
+                <Form.Group controlId="vendorCode">
+                    <Form.ControlLabel>Vendor Code</Form.ControlLabel>
+                    <Form.Control name="vendorCode" />
+                    <Form.HelpText>Vendor Code is required</Form.HelpText>
                 </Form.Group>
                 <Form.Group controlId="password">
                     <Form.ControlLabel>Password</Form.ControlLabel>

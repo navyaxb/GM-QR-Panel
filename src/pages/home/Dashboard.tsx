@@ -1,27 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import '../../App.css';
-import { userDashboardShowOverallData } from '../../utils/services/apiService';
-import { PieChart } from '@mui/x-charts/PieChart';
-import { BarChart } from '@mui/x-charts/BarChart';
-import QrCodeScannerOutlinedIcon from '@mui/icons-material/QrCodeScannerOutlined';
 import Divider from '@mui/material/Divider';
-import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
-import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
-import PersonOffOutlinedIcon from '@mui/icons-material/PersonOffOutlined';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
-import Redeem from '@mui/icons-material/Redeem';
-import { styled } from '@mui/material/styles';
-import { useDrawingArea } from '@mui/x-charts';
-import Stack from '@mui/material/Stack';
-import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import points from '../../assets/icons/points.png'
-import users from '../../assets/icons/users.png'
-import totalred from '../../assets/icons/totalredemption.png'
 import ThreePOutlinedIcon from '@mui/icons-material/ThreePOutlined';
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';    
