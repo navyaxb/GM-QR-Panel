@@ -192,7 +192,7 @@ const ProductionOrder = () => {
             renderCell: (params: any) => (
                 <div style={{ display: 'flex', gap: '8px' }}>
                     <Button variant="outlined" onClick={() => handleDetailsClick(params.row)}>Details</Button>
-                    <Button variant="contained" onClick={() => handleDownloadClick(params.row)}>Download</Button>
+                    <Button variant="contained" onClick={() => handleDownloadClick(params.row)}>Export</Button>
                 </div>
             ),
         }

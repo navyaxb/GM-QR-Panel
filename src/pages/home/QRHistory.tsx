@@ -16,6 +16,7 @@ const QRHistory = () => {
     const navigate = useNavigate();
     const { itemCode } = useParams<{ itemCode?: string }>();
     const [data, setData] = useState<QRHistoryData[]>([]);
+    const [allExported, setAllExported] = useState(false);
 
     useEffect(() => {
         const fetchData = () => {
@@ -24,7 +25,7 @@ const QRHistory = () => {
             const itemCodes = JSON.parse(queryParams.get('itemCodes') || '[]');
 
             // Simulated data fetching
-            const allData: QRHistoryData[] = [
+           const allData: QRHistoryData[] = [
                 { item_code: '123', description: 'Item 123 Description', purchasing_document: 'PO12345', manufacturing_date: '2024-09-01', exportStatus: 'Pending' },
                 { item_code: '234', description: 'Item 234 Description', purchasing_document: 'PO12345', manufacturing_date: '2024-09-02', exportStatus: 'Pending' },
                 { item_code: '345', description: 'Item 345 Description', purchasing_document: 'PO12345', manufacturing_date: '2024-09-03', exportStatus: 'Pending' },
@@ -32,21 +33,34 @@ const QRHistory = () => {
                 { item_code: '567', description: 'Item 567 Description', purchasing_document: 'PO12346', manufacturing_date: '2024-09-05', exportStatus: 'Pending' },
                 { item_code: '678', description: 'Item 678 Description', purchasing_document: 'PO12346', manufacturing_date: '2024-09-06', exportStatus: 'Pending' },
             ];
+            let filteredData: QRHistoryData[];
 
             if (itemCode) {
-                // Filter data for a specific item code
-                const filteredData = allData.filter((item) => item.item_code === itemCode);
-                setData(filteredData);
+                filteredData = allData.filter((item) => item.item_code === itemCode);
             } else if (purchasingDocument && itemCodes.length > 0) {
-                // Filter data based on the purchasing document and item codes
-                const filteredData = allData.filter((item) => 
+                filteredData = allData.filter((item) => 
                     item.purchasing_document === purchasingDocument && itemCodes.includes(item.item_code)
                 );
-                setData(filteredData);
             } else {
-                // If no specific filters, show all data
-                setData(allData);
+                filteredData = allData;
             }
+
+            // Check if all PO numbers are the same
+            if (filteredData.length > 1) {
+                const firstPO = filteredData[0].purchasing_document;
+                const allSamePO = filteredData.every(item => item.purchasing_document === firstPO);
+                
+                if (allSamePO) {
+                    setAllExported(true);
+                    filteredData = filteredData.map(item => ({...item, exportStatus: 'Exported'}));
+                } else {
+                    setAllExported(false);
+                }
+            } else {
+                setAllExported(false);
+            }
+
+            setData(filteredData);
         };
 
         fetchData();
@@ -65,33 +79,16 @@ const QRHistory = () => {
     };
 
     const columns: ColumnConfig[] = [
-        {
-            field: 'item_code',
-            headerName: 'Item Code',
-            width: 150,
-        },
-        {
-            field: 'description',
-            headerName: 'Description',
-            width: 250,
-        },
-        {
-            field: 'purchasing_document',
-            headerName: 'PO Number',
-            width: 250,
-        },
-        {
-            field: 'manufacturing_date',
-            headerName: 'Manufacturing Date',
-            width: 250,
-        },
+        { field: 'item_code', headerName: 'Item Code', width: 150 },
+        { field: 'description', headerName: 'Description', width: 250 },
+        { field: 'purchasing_document', headerName: 'PO Number', width: 250 },
+        { field: 'manufacturing_date', headerName: 'Manufacturing Date', width: 250 },
         {
             field: 'exportStatus',
             headerName: 'Export',
             width: 200,
             renderCell: (params) => {
-                const isPending = params.value === 'Pending';
-                const isExported = params.value === 'Exported';
+                const isPending = params.value === 'Pending' && !allExported;
                 return (
                     <Button
                         variant="contained"
@@ -101,9 +98,9 @@ const QRHistory = () => {
                             width: '100%',
                         }}
                         onClick={() => isPending && handleExport(params.row.item_code)}
-                        disabled={isExported}
+                        disabled={!isPending}
                     >
-                        {isPending ? 'Export' : 'Exported'}
+                        {isPending ? 'EXPORT' : 'EXPORTED'}
                     </Button>
                 );
             },
