@@ -202,22 +202,21 @@ const ProductionOrder = () => {
     const handleDetailsClick = (rowData: any) => {
         navigate(`/production-order-details/${rowData.id}`);
     };
+
     const handleDownloadClick = (rowData: any) => {
-        if (rowData && rowData.item_code) {
-            // Assuming the item_code is a comma-separated string, we'll use the first code
-            const itemCode = rowData.item_code.split(',')[0].trim();
-            navigate(`/qr-history/${itemCode}`);
+        if (rowData && rowData.purchasing_document && rowData.item_code) {
+            const itemCodes = rowData.item_code.split(',').map((code: string) => code.trim());
+            const queryParams = new URLSearchParams({
+                purchasingDocument: rowData.purchasing_document,
+                itemCodes: JSON.stringify(itemCodes)
+            });
+            navigate(`/qr-history?${queryParams.toString()}`);
         } else {
-            console.error('Item code is undefined for this row:', rowData);
+            console.error('Missing data for this row:', rowData);
             // You might want to show an error message to the user here
             // For example:
-            // setErrorMessage('Unable to download QR history. Item code is missing.');
+            // setErrorMessage('Unable to view QR history. Required data is missing.');
         }
-    };
-
-    const styles = {
-        width: 450,
-        marginBottom: 10
     };
 
 

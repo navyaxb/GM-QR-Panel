@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, DatePicker } from 'rsuite';
+import { Input, DatePicker, InputPicker } from 'rsuite';
 import Button from '@mui/material/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Generateqr.css';
@@ -8,6 +8,7 @@ const GenerateQRCodeForm = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [quantity, setQuantity] = useState('');
+    const [qrType, setQrType] = useState(null); // State to manage QR Type selection
 
     useEffect(() => {
         if (!state || !state.itemCode) {
@@ -20,12 +21,26 @@ const GenerateQRCodeForm = () => {
     expiryDate.setMonth(expiryDate.getMonth() + 18);
 
     const handleSubmit = () => {
-        if (quantity) {
+        if (quantity && qrType) {
             setTimeout(() => {
                 navigate(`/qr-history/${state.itemCode}`);
             }, 3000); // Simulating delay
         }
     };
+
+    const handleQuantityChange = (value: any) => {
+        setQuantity(value);
+    };
+
+    const handleQrTypeChange = (value: any) => {
+        setQrType(value);
+    };
+
+    const qrTypeData = [
+        { label: 'Retailer', value: 'Retailer' },
+        { label: 'Electrician', value: 'Electrician' },
+        { label: 'Counter Salesman', value: 'Counter Salesman' },
+    ];
 
     return (
         <div className="form-container">
@@ -40,8 +55,27 @@ const GenerateQRCodeForm = () => {
                     </div>
                     <div className="input-group">
                         <label className="input-label">Quantity</label>
-                        <Input placeholder="Quantity" className="input-field" value={quantity} onChange={setQuantity} />
+                        <Input 
+                            placeholder="Quantity" 
+                            className="input-field" 
+                            value={quantity} 
+                            onChange={handleQuantityChange} 
+                        />
+                        <span style={{ color: 'red' }} className="error-text">This field is required.</span>
                     </div>
+
+                    <div className="input-group">
+                        <label className="input-label">QR Type</label>
+                        <InputPicker
+                            data={qrTypeData}
+                            value={qrType}
+                            onChange={handleQrTypeChange}
+                            placeholder="Select QR Type"
+                            className="input-field"
+                        />
+                        <span style={{ color: 'red' }} className="error-text">This field is required.</span>
+                    </div>
+
                     <div className="input-group">
                         <label className="input-label">Manufacturing Date</label>
                         <DatePicker value={currentDate} className="input-field" disabled />
@@ -63,7 +97,7 @@ const GenerateQRCodeForm = () => {
                     </div>
                     <div className="input-group">
                         <label className="input-label">Manufacturing Location</label>
-                        <Input value="01" className="input-field" readOnly />
+                        <Input value="V02182" className="input-field" readOnly />
                     </div>
                 </div>
 
@@ -88,7 +122,12 @@ const GenerateQRCodeForm = () => {
             </div>
 
             <div className="submit-button-container">
-                <Button variant="contained" className="button" onClick={handleSubmit} disabled={!quantity}>
+                <Button 
+                    variant="contained" 
+                    className="button" 
+                    onClick={handleSubmit} 
+                    disabled={!quantity || !qrType}
+                >
                     SUBMIT
                 </Button>
             </div>

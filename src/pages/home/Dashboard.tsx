@@ -54,7 +54,21 @@ const Dashboard = () => {
                         <div className='change'>+32% From Yesterday</div>
                     </div>
                 </div>
-                <div className='greyContainer containerColor3'>
+                <div className='greyContainer containerColor1'>
+                    <div className='dashboardIcon' >
+                        <DocumentScannerOutlinedIcon fontSize="medium" />
+                    </div>
+                    <div className='flexBox1'>
+                        <h2>{data.kyc_verified_users}</h2>
+                        <span>QR Codes Generated</span>
+                        <div className='change'>+24% From Yesterday</div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div className='pointsRow1'>
+            <div className='greyContainer containerColor3'>
                     <div className='dashboardIcon3'>
                         <FileDownloadOutlinedIcon fontSize="medium" />
                     </div>
@@ -64,10 +78,6 @@ const Dashboard = () => {
                         <div className='change'>+20% From Yesterday</div>
                     </div>
                 </div>
-
-
-            </div>
-            <div className='pointsRow1'>
 
                 <div className='greyContainer containerColor4'>
                     <div className='dashboardIcon4'>
@@ -80,16 +90,7 @@ const Dashboard = () => {
                     </div>
 
                 </div>
-                <div className='greyContainer containerColor1'>
-                    <div className='dashboardIcon' >
-                        <DocumentScannerOutlinedIcon fontSize="medium" />
-                    </div>
-                    <div className='flexBox1'>
-                        <h2>{data.kyc_verified_users}</h2>
-                        <span>QR Codes Generated</span>
-                        <div className='change'>+24% From Yesterday</div>
-                    </div>
-                </div>
+               
             </div>
 
         </div>

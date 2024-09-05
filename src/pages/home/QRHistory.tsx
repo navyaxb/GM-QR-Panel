@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CustomTable, { ColumnConfig } from "../../components/CustomTable";
 import { Typography, Button } from '@mui/material';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 interface QRHistoryData {
     item_code: string;
@@ -12,49 +12,56 @@ interface QRHistoryData {
 }
 
 const QRHistory = () => {
-    const { itemCode } = useParams<{ itemCode?: string }>();
+    const location = useLocation();
     const navigate = useNavigate();
+    const { itemCode } = useParams<{ itemCode?: string }>();
     const [data, setData] = useState<QRHistoryData[]>([]);
 
     useEffect(() => {
         const fetchData = () => {
+            const queryParams = new URLSearchParams(location.search);
+            const purchasingDocument = queryParams.get('purchasingDocument');
+            const itemCodes = JSON.parse(queryParams.get('itemCodes') || '[]');
+
             // Simulated data fetching
             const allData: QRHistoryData[] = [
-                { item_code: '123', description: 'Item 123 Description', purchasing_document: 'PO123', manufacturing_date: '2024-09-01', exportStatus: 'Pending' },
-                { item_code: '234', description: 'Item 234 Description', purchasing_document: 'PO234', manufacturing_date: '2024-09-02', exportStatus: 'Exported' },
-                { item_code: '345', description: 'Item 345 Description', purchasing_document: 'PO345', manufacturing_date: '2024-09-03', exportStatus: 'Pending' },
-                { item_code: '456', description: 'Item 456 Description', purchasing_document: 'PO456', manufacturing_date: '2024-09-04', exportStatus: 'Pending' },
-                { item_code: '567', description: 'Item 567 Description', purchasing_document: 'PO567', manufacturing_date: '2024-09-05', exportStatus: 'Exported' },
-                { item_code: '678', description: 'Item 678 Description', purchasing_document: 'PO678', manufacturing_date: '2024-09-06', exportStatus: 'Pending' },
+                { item_code: '123', description: 'Item 123 Description', purchasing_document: 'PO12345', manufacturing_date: '2024-09-01', exportStatus: 'Pending' },
+                { item_code: '234', description: 'Item 234 Description', purchasing_document: 'PO12345', manufacturing_date: '2024-09-02', exportStatus: 'Pending' },
+                { item_code: '345', description: 'Item 345 Description', purchasing_document: 'PO12345', manufacturing_date: '2024-09-03', exportStatus: 'Pending' },
+                { item_code: '456', description: 'Item 456 Description', purchasing_document: 'PO12346', manufacturing_date: '2024-09-04', exportStatus: 'Pending' },
+                { item_code: '567', description: 'Item 567 Description', purchasing_document: 'PO12346', manufacturing_date: '2024-09-05', exportStatus: 'Pending' },
+                { item_code: '678', description: 'Item 678 Description', purchasing_document: 'PO12346', manufacturing_date: '2024-09-06', exportStatus: 'Pending' },
             ];
 
             if (itemCode) {
-                // Filter data based on the itemCode
+                // Filter data for a specific item code
                 const filteredData = allData.filter((item) => item.item_code === itemCode);
                 setData(filteredData);
-
-                // Simulate changing the export status from pending to exported after 4 seconds
-                setTimeout(() => {
-                    setData((prevData) =>
-                        prevData.map((item) =>
-                            item.item_code === itemCode
-                                ? { ...item, exportStatus: 'Exported' }
-                                : item
-                        )
-                    );
-                }, 4000);
+            } else if (purchasingDocument && itemCodes.length > 0) {
+                // Filter data based on the purchasing document and item codes
+                const filteredData = allData.filter((item) => 
+                    item.purchasing_document === purchasingDocument && itemCodes.includes(item.item_code)
+                );
+                setData(filteredData);
             } else {
-                // If no itemCode, show all data
+                // If no specific filters, show all data
                 setData(allData);
             }
         };
 
         fetchData();
-    }, [itemCode]);
+    }, [location, itemCode]);
 
-    const handleGenerateMoreClick = () => {
-        // Redirect to the Generate QR page
-        navigate('/generateqr');
+    const handleExport = (itemCode: string) => {
+        setData((prevData) =>
+            prevData.map((item) =>
+                item.item_code === itemCode
+                    ? { ...item, exportStatus: 'Exported' }
+                    : item
+            )
+        );
+        // Here you would typically call an API to perform the actual export
+        console.log(`Exporting data for item code: ${itemCode}`);
     };
 
     const columns: ColumnConfig[] = [
@@ -80,35 +87,34 @@ const QRHistory = () => {
         },
         {
             field: 'exportStatus',
-            headerName: 'Export Status',
+            headerName: 'Export',
             width: 200,
             renderCell: (params) => {
-                if (itemCode) {
-                    // Display a button if itemCode is present in the path
-                    const isPending = params.value === 'Pending';
-                    return (
-                        <Button
-                            variant="contained"
-                            style={{
-                                backgroundColor: isPending ? 'yelow' : 'red',
-                                color: isPending ? 'black' : 'white',
-                                width: '100%',
-                            }}
-                        >
-                            {isPending ? 'Pending' : 'Export'}
-                        </Button>
-                    );
-                } else {
-                    // Display only the export status as text if itemCode is not present
-                    return <Typography>{params.value}</Typography>;
-                }
+                const isPending = params.value === 'Pending';
+                const isExported = params.value === 'Exported';
+                return (
+                    <Button
+                        variant="contained"
+                        style={{
+                            backgroundColor: isPending ? 'red' : 'green',
+                            color: 'white',
+                            width: '100%',
+                        }}
+                        onClick={() => isPending && handleExport(params.row.item_code)}
+                        disabled={isExported}
+                    >
+                        {isPending ? 'Export' : 'Exported'}
+                    </Button>
+                );
             },
         },
     ];
 
     return (
         <div className='screen' style={{ padding: '20px' }}>
-            <Typography variant="h5">QR History</Typography>
+            <Typography variant="h5">
+                {itemCode ? `QR History for Item Code: ${itemCode}` : 'QR History'}
+            </Typography>
             <div className='table' style={{ marginTop: '20px' }}>
                 <CustomTable
                     editMode={'row'}
@@ -118,11 +124,8 @@ const QRHistory = () => {
                     getRowId={(data: QRHistoryData) => data.item_code}
                 />
             </div>
-           
         </div>
     );
 };
 
 export default QRHistory;
-
-
